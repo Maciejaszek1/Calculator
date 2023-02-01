@@ -1,32 +1,18 @@
-/*let a = prompt('num1');
-let b = prompt('operator');
-let c = prompt('num 2');
-
-let wynik = 0;
-
-if (b == '+') wynik = a + c;
-else if (b == '-') wynik = a - c;
-else if (b == '*') wynik = a * c;
-else if (b == '/') wynik = a / c;
-else alert('wrong operator');
-console.log(toString(wynik));
-console.log(wynik);*/
-
-//make a function that adds 2 chosen numbers
-
+//event listener shortcut for numbers
 function numListener(number, num) {
    number.addEventListener('click', function () {
-      if(firstNum == 0) {
-         firstNum = num;
-         console.log("fn" + firstNum);
+      if(operator != "") {
+         firstArr.push(num);
+         console.log(firstArr);
       }
       else {
-         secondNum = num;
-         console.log("sn" + secondNum);
+         secondArr.push(num);
+         console.log(secondArr);
       }
    });
 }
 
+//event listener shortcut for operations
 function opListener(operation) {
    operation.addEventListener('click', function () {
       operator = this.textContent;
@@ -34,21 +20,24 @@ function opListener(operation) {
    });
 }
 
+//returns operation from 2 numbers
 function operation() {
    if (operator == "+") {
-      result = firstNum + secondNum;
+      result = secondNum + firstNum;
    } else if (operator == "-"){
-      result = firstNum - secondNum;
+      result = secondNum - firstNum;
    } else if (operator == "*"){
-      result = firstNum * secondNum;
+      result = secondNum * firstNum;
    } else if (operator == "/"){
-      result = firstNum / secondNum;
+      result = secondNum / firstNum;
    }
 }
 
 
 
 let result = 0;
+let firstArr = [];
+let secondArr = [];
 let firstNum = 0;
 let secondNum = 0;
 let operator = "";
@@ -87,6 +76,11 @@ opListener(divide);
 opListener(multiply);
 
 equal.addEventListener('click',function () {
+   firstNum = parseInt(firstArr.join(''));
+   secondNum = parseInt(secondArr.join(''));
+   console.log(typeof firstNum + firstNum);
+   console.log(typeof secondNum + secondNum);
+
    operation();
    console.log(result);
 })
