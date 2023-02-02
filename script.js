@@ -32,13 +32,13 @@ function opListener(operation) {
 function operation() {
 
       if (operator == "+") {
-         result = secondNum + firstNum;
+         result = firstNum + secondNum;
       } else if (operator == "-"){
-         result = secondNum - firstNum;
+         result = firstNum - secondNum;
       } else if (operator == "*"){
-         result = secondNum * firstNum;
+         result = firstNum * secondNum;
       } else if (operator == "/"){
-         result = secondNum / firstNum;
+         result = firstNum / secondNum;
       }
 }
 
