@@ -1,7 +1,7 @@
 //event listener shortcut for numbers
 function numListener(number, num) {
    number.addEventListener('click', function () {
-      if(operator != "") {
+      if(operator == "") {
          firstArr.push(num);
          console.log(firstArr);
       }
@@ -15,6 +15,14 @@ function numListener(number, num) {
 //event listener shortcut for operations
 function opListener(operation) {
    operation.addEventListener('click', function () {
+      if(operatorClicked == true){
+         equate();
+         firstArr = [];
+         firstArr[0] = result;
+         secondArr = [];
+      }
+
+      operatorClicked = true;
       operator = this.textContent;
       console.log(operator);
    });
@@ -22,22 +30,44 @@ function opListener(operation) {
 
 //returns operation from 2 numbers
 function operation() {
-   if (operator == "+") {
-      result = secondNum + firstNum;
-   } else if (operator == "-"){
-      result = secondNum - firstNum;
-   } else if (operator == "*"){
-      result = secondNum * firstNum;
-   } else if (operator == "/"){
-      result = secondNum / firstNum;
-   }
+
+      if (operator == "+") {
+         result = secondNum + firstNum;
+      } else if (operator == "-"){
+         result = secondNum - firstNum;
+      } else if (operator == "*"){
+         result = secondNum * firstNum;
+      } else if (operator == "/"){
+         result = secondNum / firstNum;
+      }
 }
 
+//equates
+function equate() {
+   firstNum = parseInt(firstArr.join(''));
+   secondNum = parseInt(secondArr.join(''));
+   console.log(typeof firstNum + firstNum);
+   console.log(typeof secondNum + secondNum);
 
+   operation();
+   console.log(result);
+}
 
-let result = 0;
+//clears calculator
+function clear() {
+   operatorClicked = false;
+   firstArr = [];
+   secondArr = [];
+   result =0;
+   firstNum = 0;
+   secondNum = 0;
+   operator = "";
+}
+
+let operatorClicked = false;
 let firstArr = [];
 let secondArr = [];
+let result = 0;
 let firstNum = 0;
 let secondNum = 0;
 let operator = "";
@@ -57,7 +87,13 @@ const sum = document.getElementById('sum');
 const subtract = document.getElementById('subtract');
 const divide = document.getElementById('divide');
 const multiply = document.getElementById('multiply');
-const equal = document.getElementById('equal');
+
+const dot = document.getElementById('dot');
+const clearButton = document.getElementById('clear');
+const deletion = document.getElementById('delete');
+const equateButton = document.getElementById('equal');
+
+const screen = document.getElementById
 
 numListener(num0, 0);
 numListener(num1, 1);
@@ -75,13 +111,12 @@ opListener(subtract);
 opListener(divide);
 opListener(multiply);
 
-equal.addEventListener('click',function () {
-   firstNum = parseInt(firstArr.join(''));
-   secondNum = parseInt(secondArr.join(''));
-   console.log(typeof firstNum + firstNum);
-   console.log(typeof secondNum + secondNum);
 
-   operation();
-   console.log(result);
-})
+//event listener for equasion
+equateButton.addEventListener('click',function (){
+   equate();
+   clear();
+});
+
+clearButton.addEventListener('click', clear);
 
