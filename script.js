@@ -1,5 +1,6 @@
 //event listener shortcut for numbers
 function numListener(number, num) {
+
    number.addEventListener('click', function () {
       if(operator == "") {
          firstArr.push(num);
@@ -44,8 +45,12 @@ function operation() {
 
 //equates
 function equate() {
-   firstNum = parseInt(firstArr.join(''));
-   secondNum = parseInt(secondArr.join(''));
+   if (firstArr.length == 0) firstArr.push(0);
+   if (secondArr.length == 0) secondArr.push(0);
+   
+   firstNum = parseFloat(firstArr.join(''));
+   secondNum = parseFloat(secondArr.join(''));
+
    console.log(typeof firstNum + firstNum);
    console.log(typeof secondNum + secondNum);
 
@@ -62,6 +67,17 @@ function clear() {
    firstNum = 0;
    secondNum = 0;
    operator = "";
+}
+
+//deletes last number in array
+function deletion() {
+   if(operator == ""){
+      firstArr.pop();
+      console.log(firstArr);
+   } else {
+      secondArr.pop();
+      console.log(secondArr);
+   }
 }
 
 let operatorClicked = false;
@@ -90,7 +106,7 @@ const multiply = document.getElementById('multiply');
 
 const dot = document.getElementById('dot');
 const clearButton = document.getElementById('clear');
-const deletion = document.getElementById('delete');
+const deleteButton = document.getElementById('delete');
 const equateButton = document.getElementById('equal');
 
 const screen = document.getElementById
@@ -119,4 +135,6 @@ equateButton.addEventListener('click',function (){
 });
 
 clearButton.addEventListener('click', clear);
+deleteButton.addEventListener('click', deletion);
+
 
