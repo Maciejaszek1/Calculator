@@ -1,14 +1,24 @@
+function display(numbers) {
+   const screen = document.querySelector('.screen');
+   screen.textContent += numbers;
+}
+
+function clearDisplay() {
+   const screen = document.querySelector('.screen');
+   screen.textContent = "";
+}
+
 //event listener shortcut for numbers
 function numListener(number, num) {
 
    number.addEventListener('click', function () {
       if(operator == "") {
          firstArr.push(num);
-         console.log(firstArr);
+         display(this.textContent);
       }
       else {
          secondArr.push(num);
-         console.log(secondArr);
+         display(this.textContent);
       }
    });
 }
@@ -18,15 +28,12 @@ function opListener(operation) {
    operation.addEventListener('click', function () {
       if(operatorClicked == true){
          equate();
-         firstArr = [];
-         firstArr[0] = result;
-         secondArr = [];
       }
 
       dot.disabled = false;
       operatorClicked = true;
       operator = this.textContent;
-      console.log(operator);
+      display(" " + this.textContent + " ");
    });
 }
 
@@ -52,11 +59,13 @@ function equate() {
    firstNum = parseFloat(firstArr.join(''));
    secondNum = parseFloat(secondArr.join(''));
 
-   console.log(typeof firstNum + firstNum);
-   console.log(typeof secondNum + secondNum);
-
    operation();
-   console.log(result);
+   clearDisplay();
+   display(result);
+
+   firstArr = [];
+   firstArr[0] = result;
+   secondArr = [];
 }
 
 //clears calculator
@@ -69,6 +78,7 @@ function clear() {
    firstNum = 0;
    secondNum = 0;
    operator = "";
+   dot.disabled = false;
 }
 
 //deletes last number in array
@@ -112,8 +122,6 @@ const clearButton = document.getElementById('clear');
 const deleteButton = document.getElementById('delete');
 const equateButton = document.getElementById('equal');
 
-const screen = document.getElementById
-
 numListener(num0, 0);
 numListener(num1, 1);
 numListener(num2, 2);
@@ -131,23 +139,25 @@ opListener(divide);
 opListener(multiply);
 
 
-//event listener for equasion
+//event listener for equation
 equateButton.addEventListener('click',function (){
    equate();
    clear();
 });
 
-clearButton.addEventListener('click', clear);
+clearButton.addEventListener('click', (clear,clearDisplay));
 deleteButton.addEventListener('click', deletion);
+
+dot.disabled = false;
 dot.addEventListener('click',function () {
    if(operator == ""){
       firstArr.push('.');
-      console.log(firstArr);
+      display(this.textContent);
       dot.disabled = true;
    } else {
       if(dotClicked == false){
          secondArr.push('.');
-         console.log(secondArr);
+         display(this.textContent);
       
          dotClicked = true;
          dot.disabled = true;
