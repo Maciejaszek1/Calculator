@@ -23,6 +23,7 @@ function opListener(operation) {
          secondArr = [];
       }
 
+      dot.disabled = false;
       operatorClicked = true;
       operator = this.textContent;
       console.log(operator);
@@ -61,9 +62,10 @@ function equate() {
 //clears calculator
 function clear() {
    operatorClicked = false;
+   dotClicked = false;
    firstArr = [];
    secondArr = [];
-   result =0;
+   result = 0;
    firstNum = 0;
    secondNum = 0;
    operator = "";
@@ -81,6 +83,7 @@ function deletion() {
 }
 
 let operatorClicked = false;
+let dotClicked = false;
 let firstArr = [];
 let secondArr = [];
 let result = 0;
@@ -136,5 +139,20 @@ equateButton.addEventListener('click',function (){
 
 clearButton.addEventListener('click', clear);
 deleteButton.addEventListener('click', deletion);
+dot.addEventListener('click',function () {
+   if(operator == ""){
+      firstArr.push('.');
+      console.log(firstArr);
+      dot.disabled = true;
+   } else {
+      if(dotClicked == false){
+         secondArr.push('.');
+         console.log(secondArr);
+      
+         dotClicked = true;
+         dot.disabled = true;
+      }
+   }
+})
 
 
