@@ -67,11 +67,7 @@ function equate() {
 
    operation();
    clearDisplay();
-   display(result);
-
-   firstArr = [];
-   firstArr[0] = result;
-   secondArr = [];
+   display(Math.round(result * 100) / 100);
 }
 
 //clears calculator
@@ -150,6 +146,7 @@ opListener(multiply);
 equateButton.addEventListener('click',function (){
    equate();
    clear();
+   firstArr.push(result);
 });
 
 clearButton.addEventListener('click', function(){
