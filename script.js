@@ -1,9 +1,9 @@
 function display(numbers) {
-   screen.textContent += numbers;
+   screenContent.textContent += numbers;
 }
 
 function clearDisplay() {
-   screen.textContent = "";
+   screenContent.textContent = "";
 }
 
 //event listener shortcut for numbers
@@ -27,7 +27,7 @@ function opListener(operation) {
       if(operatorClicked == true && secondArr != ""){
          equate();
       } else if (operatorClicked == true && secondArr == ""){
-         screen.textContent = screen.textContent
+         screenContent.textContent = screenContent.textContent
             .toString()
             .slice(0, -3)
          ;
@@ -89,7 +89,7 @@ function deletion() {
    } else {
       secondArr.pop();
    }
-   screen.textContent = screen.textContent
+   screenContent.textContent = screenContent.textContent
    .toString()
    .slice(0, -1)
 }
@@ -124,6 +124,9 @@ const deleteButton = document.getElementById('delete');
 const equateButton = document.getElementById('equal');
 
 const screen = document.querySelector('.screen');
+const screenContent = document.createElement('div');
+screenContent.classList.add('screenContent');
+screen.appendChild(screenContent);
 
 numListener(num0, 0);
 numListener(num1, 1);
