@@ -26,6 +26,8 @@ function opListener(operation) {
    operation.addEventListener('click', function () {
       if(operatorClicked == true && secondArr != ""){
          equate();
+         clear();
+         firstArr.push(result);
       } else if (operatorClicked == true && secondArr == ""){
          screenContent.textContent = screenContent.textContent
             .toString()
