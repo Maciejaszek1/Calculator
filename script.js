@@ -26,13 +26,18 @@ function numListener(number, num) {
 //event listener shortcut for operations
 function opListener(operation) {
    operation.addEventListener('click', function () {
-      if(operatorClicked == true){
+      if(operatorClicked == true && secondArr != ""){
          equate();
+      } else if (operatorClicked == true && secondArr == ""){
+         deletion();
+         operator = this.textContent;
       }
 
       dot.disabled = false;
       operatorClicked = true;
       operator = this.textContent;
+      
+      if (firstArr.length == 0) display(0);
       display(" " + this.textContent + " ");
    });
 }
@@ -71,10 +76,8 @@ function equate() {
 //clears calculator
 function clear() {
    operatorClicked = false;
-   dotClicked = false;
    firstArr = [];
    secondArr = [];
-   result = 0;
    firstNum = 0;
    secondNum = 0;
    operator = "";
@@ -83,17 +86,19 @@ function clear() {
 
 //deletes last number in array
 function deletion() {
+   const screen = document.querySelector('.screen');
+   
    if(operator == ""){
       firstArr.pop();
-      console.log(firstArr);
    } else {
       secondArr.pop();
-      console.log(secondArr);
    }
+   screen.textContent = screen.textContent
+   .toString()
+   .slice(0, -1)
 }
 
 let operatorClicked = false;
-let dotClicked = false;
 let firstArr = [];
 let secondArr = [];
 let result = 0;
@@ -145,23 +150,23 @@ equateButton.addEventListener('click',function (){
    clear();
 });
 
-clearButton.addEventListener('click', (clear,clearDisplay));
+clearButton.addEventListener('click', function(){
+   result = 0;
+   clear();
+   clearDisplay();
+});
 deleteButton.addEventListener('click', deletion);
 
-dot.disabled = false;
 dot.addEventListener('click',function () {
    if(operator == ""){
       firstArr.push('.');
       display(this.textContent);
       dot.disabled = true;
    } else {
-      if(dotClicked == false){
-         secondArr.push('.');
-         display(this.textContent);
-      
-         dotClicked = true;
-         dot.disabled = true;
-      }
+      secondArr.push('.');
+      display(this.textContent);
+   
+      dot.disabled = true;
    }
 })
 
