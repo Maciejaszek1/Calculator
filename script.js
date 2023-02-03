@@ -1,10 +1,8 @@
 function display(numbers) {
-   const screen = document.querySelector('.screen');
    screen.textContent += numbers;
 }
 
 function clearDisplay() {
-   const screen = document.querySelector('.screen');
    screen.textContent = "";
 }
 
@@ -29,7 +27,10 @@ function opListener(operation) {
       if(operatorClicked == true && secondArr != ""){
          equate();
       } else if (operatorClicked == true && secondArr == ""){
-         deletion();
+         screen.textContent = screen.textContent
+            .toString()
+            .slice(0, -3)
+         ;
          operator = this.textContent;
       }
 
@@ -86,8 +87,7 @@ function clear() {
 
 //deletes last number in array
 function deletion() {
-   const screen = document.querySelector('.screen');
-   
+       
    if(operator == ""){
       firstArr.pop();
    } else {
@@ -126,6 +126,8 @@ const dot = document.getElementById('dot');
 const clearButton = document.getElementById('clear');
 const deleteButton = document.getElementById('delete');
 const equateButton = document.getElementById('equal');
+
+const screen = document.querySelector('.screen');
 
 numListener(num0, 0);
 numListener(num1, 1);
