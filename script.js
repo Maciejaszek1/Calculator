@@ -1,5 +1,12 @@
 function display(numbers) {
-   screenContent.textContent += numbers;
+   
+   if (screenContent.textContent.toString().length < 19){
+      screenContent.textContent += numbers;
+   }  else {
+      (secondArr.length == 0) ? 
+         firstArr.splice(-1,1) :
+         secondArr.splice(-1,1);
+   }
 }
 
 function clearDisplay() {
@@ -29,10 +36,7 @@ function opListener(operation) {
          clear();
          firstArr.push(result);
       } else if (operatorClicked == true && secondArr == ""){
-         screenContent.textContent = screenContent.textContent
-            .toString()
-            .slice(0, -3)
-         ;
+         deletion();
          operator = this.textContent;
       }
 
@@ -41,7 +45,7 @@ function opListener(operation) {
       operator = this.textContent;
       
       if (firstArr.length == 0) display(0);
-      display(" " + this.textContent + " ");
+      display(this.textContent);
    });
 }
 
@@ -67,6 +71,8 @@ function equate() {
    firstNum = parseFloat(firstArr.join(''));
    secondNum = parseFloat(secondArr.join(''));
 
+   console.log(firstNum);
+   console.log(secondNum);
    operation();
    clearDisplay();
    display(Math.round(result * 100) / 100);

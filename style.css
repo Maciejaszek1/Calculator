@@ -43,9 +43,10 @@ body {
 }
 
 .screenContent {
-    width: 34vh;
+    width: 38vh;
     height: 8vh;
     text-align: right;
+    margin-right: 5px;
 }
 
 .buttons {
@@ -79,6 +80,7 @@ button {
 button:active{
     background-color: #35457D;
 }
+
 
 /*FOOTER*/
 .footer{
